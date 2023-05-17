@@ -1,25 +1,42 @@
-import logo from './logo.svg';
-import './App.css';
+// import logo from './logo.svg';
+// import './App.css';
+// import Login from './component/Login';
+// import Signup from './component/Signup';
+// import Main from './component/Main';
+// import State from './State';
 
-function App() {
+// function App() {
+//   return (
+//     <>
+    
+//     <State/>
+//    </>
+//   );
+// }
+
+// export default App;
+import React, { useState } from 'react';
+import GlobalStateContext from './GlobalStateContext';
+
+import Component1Child from './Component1Child';
+import Component3 from './component/Component3';
+
+const App = () => {
+  const [username, setUsername] = useState('');
+
+  
+  const updateUsername = (newUsername) => {
+    setUsername(newUsername);
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <GlobalStateContext.Provider value={{ username, updateUsername }}>
+      <h1>Parent Component ie component 1</h1>
+      <p>Username in Parent: {username}</p>
+      <Component3 />
+      <Component1Child username={username} />
+    </GlobalStateContext.Provider>
   );
-}
+};
 
 export default App;
